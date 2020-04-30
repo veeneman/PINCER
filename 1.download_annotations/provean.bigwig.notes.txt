@@ -1,0 +1,26 @@
+library(rtracklayer)
+x = import("provean.bedgraph");
+u = disjoin(x);
+
+o = findOverlaps(u, x);
+d = unique(from(o)[duplicated(from(o))])
+o1 = o[!from(o) %in% d] #singly mapping
+o2 = o[from(o) %in% d]  #multi  mapping
+
+mcols(u)[from(o1),"score"] = mcols(x)[to(o1), "score"]
+
+o3 = sapply(split(mcols(x)$score[to(o2)], from(o2)), mean, na.rm = T)
+mcols(u)[as.numeric(names(o3)),"score"] = unname(o3)
+
+sl = read.table("~/hpc/ref/hg38/hg38.fa.fai")
+sl = setNames(sl[,"V2"], sl[,"V1"])
+
+seqlengths(u) = sl[names(seqlengths(u))]
+export(u, "provean.uniq.bw", format = "BigWig")
+
+/hpc/grid/oncology/veeneb/ref/hg38/anno/provean.uniq.bw
+
+load("hg38.guideDB_v1.3b.Rdata")
+library(rtracklayer)
+guides.out = GRanges(seqnames(guides.picked), guides.picked$ranges.o, strand(guides.picked), DataFrame("name" = paste0(guides.picked$principal.gene.name, ".T", guides.picked$tier, ".", guides.picked$pick)))
+export(guides.out, con = "hg38.guideDB_v1.3b.IGV.bed", format = "BED")
