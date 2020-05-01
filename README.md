@@ -1,6 +1,7 @@
-Data available here: https://github.com/veeneman/PINCER/releases/tag/1.0
+## Data Availability
+https://github.com/veeneman/PINCER/releases/tag/1.0
 
-# Loading the guide database files in R
+## How to load guide database in R
 ```R
 #Run this code once to install libraries
 install.packages("BiocManager");
