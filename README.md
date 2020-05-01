@@ -1,5 +1,4 @@
-# PINCER
-See https://github.com/veeneman/PINCER/releases/tag/1.0 for data
+Data available here: https://github.com/veeneman/PINCER/releases/tag/1.0
 
 # Loading the guide database files in R
 ```R
