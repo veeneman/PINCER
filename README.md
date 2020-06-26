@@ -1,5 +1,5 @@
 ## Data Availability
-https://github.com/veeneman/PINCER/releases/tag/1.0
+https://github.com/veeneman/PINCER/releases/tag/1.1
 
 ## How to load guide database in R
 ```R
